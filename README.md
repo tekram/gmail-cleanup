@@ -17,6 +17,10 @@ Runs both analyses in sequence, showing:
 1. Top senders by email count
 2. Top senders by email size
 
+Results are saved to:
+- `top_senders_by_count.txt` - Top 50 senders by email count
+- `top_senders_by_size.txt` - Top 50 senders by email size
+
 ### 1. `cleanup_email.py`
 Analyzes your MBOX file to identify the top senders by **email count**. This script extracts sender names and email addresses, then displays the top 50 senders ranked by the number of emails they've sent.
 
@@ -24,6 +28,7 @@ Analyzes your MBOX file to identify the top senders by **email count**. This scr
 - Extracts sender names and email addresses from email headers
 - Counts occurrences of each sender
 - Displays top 50 senders sorted by email count
+- Saves results to `top_senders_by_count.txt` for easy copy and paste
 
 **Usage:**
 ```bash
@@ -31,6 +36,7 @@ python cleanup_email.py
 ```
 
 **Output:**
+Results are displayed in the console and saved to `top_senders_by_count.txt`:
 ```
 Top Senders:
 John Doe <john@example.com>: 150 emails
@@ -45,6 +51,7 @@ Analyzes your MBOX file to identify the top senders by **total email size**. Thi
 - Extracts sender email addresses
 - Calculates total size of emails per sender (in bytes)
 - Displays top 50 senders sorted by total size (shown in KB)
+- Saves results to `top_senders_by_size.txt` for easy copy and paste
 
 **Usage:**
 ```bash
@@ -52,6 +59,7 @@ python size_cleanup_mail.py
 ```
 
 **Output:**
+Results are displayed in the console and saved to `top_senders_by_size.txt`:
 ```
 Top 50 Senders by Email Size:
 newsletter@example.com: 1250.50 KB
@@ -88,7 +96,9 @@ marketing@company.com: 980.25 KB
    ├── analyze_mailbox.py      ← Run this to execute both analyses
    ├── cleanup_email.py
    ├── size_cleanup_mail.py
-   └── mails.mbox              ← Your MBOX file must be here with this exact name
+   ├── mails.mbox              ← Your MBOX file must be here with this exact name
+   ├── top_senders_by_count.txt  ← Generated after running cleanup_email.py
+   └── top_senders_by_size.txt   ← Generated after running size_cleanup_mail.py
    ```
    
    **Note:** If your exported MBOX file has a different name (e.g., `mail.mbox` or `All mail Including Spam and Trash.mbox`), you must rename it to `mails.mbox`. Alternatively, you can edit the `mbox_file` variable in `cleanup_email.py` (line 29) or the `file_path` variable in `size_cleanup_mail.py` (line 41) to match your file name.
@@ -114,9 +124,19 @@ marketing@company.com: 980.25 KB
 - **Email cleanup**: Prioritize which senders to unsubscribe from or delete emails from
 - **Storage analysis**: Understand which domains or senders are consuming the most storage
 
+## Output Files
+
+Both scripts automatically save their results to text files for easy copy and paste:
+
+- **`top_senders_by_count.txt`** - Contains the top 50 senders ranked by email count
+- **`top_senders_by_size.txt`** - Contains the top 50 senders ranked by total email size
+
+These files are created in the same directory as the scripts and can be easily opened, copied, or shared.
+
 ## Notes
 
 - Both scripts process the entire MBOX file, which may take some time for large mailboxes
 - The scripts handle common email header formats and encoding issues
 - Error messages are displayed if individual emails cannot be processed, but the script continues processing the rest of the mailbox
+- Results are saved to text files automatically - no need to copy from the console!
 

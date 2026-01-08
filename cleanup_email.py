@@ -27,6 +27,8 @@ def extract_email_addresses_with_names(mbox_file):
 
 def main():
     mbox_file = "mails.mbox"  # Replace with your MBOX file name
+    output_file = "top_senders_by_count.txt"
+    
     print(f"Reading MBOX file: {mbox_file}...")
 
     senders = extract_email_addresses_with_names(mbox_file)
@@ -36,9 +38,16 @@ def main():
     senders_count = Counter(senders)
     most_common_senders = senders_count.most_common(50)
 
-    print("\nTop Senders:")
-    for (name, email), count in most_common_senders:
-        print(f"{name} <{email}>: {count} emails")
+    # Write results to file
+    with open(output_file, 'w', encoding='utf-8') as f:
+        f.write("Top 50 Senders by Email Count\n")
+        f.write("=" * 70 + "\n\n")
+        for (name, email), count in most_common_senders:
+            line = f"{name} <{email}>: {count} emails\n"
+            f.write(line)
+            print(f"{name} <{email}>: {count} emails")
+    
+    print(f"\nResults saved to: {output_file}")
 
 if __name__ == "__main__":
     main()
