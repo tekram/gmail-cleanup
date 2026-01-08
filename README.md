@@ -4,6 +4,19 @@ A collection of Python scripts to analyze MBOX email files exported from Gmail. 
 
 ## Scripts
 
+### 🚀 `analyze_mailbox.py` (Recommended)
+**Run both analyses at once!** This unified script runs both the email count and size analysis sequentially, giving you a complete overview of your mailbox.
+
+**Usage:**
+```bash
+python analyze_mailbox.py
+```
+
+**Output:**
+Runs both analyses in sequence, showing:
+1. Top senders by email count
+2. Top senders by email size
+
 ### 1. `cleanup_email.py`
 Analyzes your MBOX file to identify the top senders by **email count**. This script extracts sender names and email addresses, then displays the top 50 senders ranked by the number of emails they've sent.
 
@@ -63,15 +76,35 @@ marketing@company.com: 980.25 KB
    - Choose MBOX format
    - Download and extract the archive
 
-2. Place your MBOX file in the project directory and name it `mails.mbox`
+2. **Place your MBOX file in the project root directory** (the same folder where `cleanup_email.py` and `size_cleanup_mail.py` are located)
 
-   **Note:** Both scripts currently expect the MBOX file to be named `mails.mbox`. If your file has a different name, edit the `mbox_file` or `file_path` variable in the respective script.
+3. **Rename your MBOX file to `mails.mbox`**
+   
+   **Important:** Both scripts require the file to be named exactly `mails.mbox` and located in the project root directory. The scripts use relative paths, so the file must be in the same directory as the Python scripts.
+   
+   **Example directory structure:**
+   ```
+   gmail-cleanup/
+   ├── analyze_mailbox.py      ← Run this to execute both analyses
+   ├── cleanup_email.py
+   ├── size_cleanup_mail.py
+   └── mails.mbox              ← Your MBOX file must be here with this exact name
+   ```
+   
+   **Note:** If your exported MBOX file has a different name (e.g., `mail.mbox` or `All mail Including Spam and Trash.mbox`), you must rename it to `mails.mbox`. Alternatively, you can edit the `mbox_file` variable in `cleanup_email.py` (line 29) or the `file_path` variable in `size_cleanup_mail.py` (line 41) to match your file name.
 
-3. Run either script:
+4. Run the analysis:
+   
+   **Option A: Run both analyses together (Recommended)**
    ```bash
-   python cleanup_email.py
+   python analyze_mailbox.py
+   ```
+   
+   **Option B: Run individual analyses**
+   ```bash
+   python cleanup_email.py      # Email count analysis only
    # or
-   python size_cleanup_mail.py
+   python size_cleanup_mail.py  # Email size analysis only
    ```
 
 ## Use Cases
